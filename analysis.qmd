@@ -2,5 +2,130 @@
 title: "Analyzing US Births and Basketball Recruits"
 author: "Suhani Shah"
 format: html
+execute:
+  echo: false
 ---
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(readxl)
+library(readxl)
+library(dplyr)
+# Read the Excel file from your data folder
+my_data <- read_excel("data/us_births_1994_2014.xlsx")
+
+# View the structure of the data
+glimpse(my_data)
+library(readxl)
+df <- read_excel("data/us_births_1994_2014.xlsx")
+summary(df[c("births", "year")])
+
+```
+
+```{r}
+#| cache: true
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+
+births_tibble <- read_excel("data/us_births_1994_2014.xlsx") %>%
+  mutate(day_of_week = factor(day_of_week,
+    levels = c("Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"),
+    ordered = TRUE))
+
+births_tibble |>
+  group_by(month, date_of_month) |>
+  summarize(mean_births = mean(births), .groups = "drop") |>
+  ggplot(aes(x = date_of_month, y = fct_rev(factor(month)), fill = mean_births)) +
+  geom_tile()
+  births_tibble |>
+  filter(month == 12) |>
+  group_by(year) |>
+  summarize(
+    christmas_births = births[date_of_month == 25],
+    baseline_births = mean(births[date_of_month %in% c(20:24, 27:30)]),
+    percentage = (christmas_births / baseline_births) * 100,
+    .groups = "drop"
+  )
+
+```
+```{r}
+christmas_data <- births_tibble |>
+  filter(month == 12) |>
+  group_by(year) |>
+  summarize(
+    christmas_births = births[date_of_month == 25],
+    baseline_births = mean(births[date_of_month %in% c(20:24, 27:30)]),
+    percentage = (christmas_births / baseline_births) * 100,
+    .groups = "drop"
+  )
+```
+
+```{r}
+summary(christmas_data)
+```
+
+The `pct_of_baseline` ranges from roughly 48% to 75% — a 27-point swing across just 21 Christmases, with a
+
+
+```{r}
+christmas_data |>
+  ggplot(aes(x = year, y = percentage)) +  # Changed here
+  geom_line(color = "gray60", linewidth = 0.5) +
+
+  geom_point(size = 2) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    title = "Dec 25 Births as a Share of Surrounding-Day Baseline",
+    subtitle = "Year-over-year comparison looks noisy",
+    x = "Year",
+    y = "Dec 25 births as % of baseline",
+    caption = "Source: FiveThirtyEight/SSA (1994–2014)"
+  ) +
+  theme_minimal()
+  births_model <- lm(births ~ factor(year) + factor(month) + day_of_week, data = births_tibble)
+summary(births_model)$r.squared
+
+```
+
+
+```{r}
+births_adjusted <- births_tibble %>%
+  mutate(pct_resid = resid(births_model) / mean(births) * 100)
+calendar_resid <- births_adjusted %>%
+  # Filter out Leap Day
+  filter(!(month == 2 & date_of_month == 29)) %>%
+  # Group by month and day
+  group_by(month, date_of_month) %>%
+  # Compute the mean residual for each of the 365 days
+  summarize(mean_resid = mean(pct_resid, na.rm = TRUE), .groups = "drop") %>%
+  # Assign a calendar date using 2001 as the anchor year
+  mutate(date = make_date(year = 2001, month = month, day = date_of_month))
+
+calendar_resid
+
+```
+
+```{r}
+calendar_resid |>
+  ggplot(aes(x = calendar_date, y = mean_pct_resid)) +
+  geom_hline(yintercept = 0, color = "gray60") +
+  geom_line(linewidth = 0.4) +
+  annotate("text", x = as.Date("2001-01-01"), y = -38, label = "Jan. 1",  size = 3, hjust = 0.2) +
+  annotate("text", x = as.Date("2001-07-04"), y = -14, label = "July 4",  size = 3, hjust = 0.5) +
+  annotate("text", x = as.Date("2001-12-25"), y = -38, label = "Dec. 25", size = 3, hjust = 1) +
+  scale_x_date(date_labels = "%b.", date_breaks = "3 months") +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  labs(
+    title = "Fewer Babies Are Born on Holidays",
+    subtitle = "US births relative to year-, month-, and weekday-adjusted baseline (1994–2014)",
+    x = NULL,
+    y = "% vs. adjusted baseline",
+    caption = "Source: FiveThirtyEight/SSA (1994–2014)"
+  ) +
+  theme_minimal()
+```
 
