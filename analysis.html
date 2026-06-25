@@ -74,6 +74,18 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 7,670
 Columns: 5
@@ -83,81 +95,120 @@ $ date_of_month &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1
 $ day_of_week   &lt;chr&gt; "Sat", "Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat…
 $ births        &lt;dbl&gt; 8096, 7772, 10142, 11248, 11053, 11406, 11251, 8653, 791…</code></pre>
 </div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>     births           year     
- Min.   : 5728   Min.   :1994  
- 1st Qu.: 8786   1st Qu.:1999  
- Median :11981   Median :2004  
- Mean   :11175   Mean   :2004  
- 3rd Qu.:12816   3rd Qu.:2009  
- Max.   :16081   Max.   :2014  </code></pre>
+<pre><code>      rank        nba_mean_ws48       top_mean_wa     total_seasons   
+ Min.   :  1.00   Min.   :-0.03000   Min.   :-2.980   Min.   : 0.000  
+ 1st Qu.: 25.00   1st Qu.: 0.07000   1st Qu.: 0.970   1st Qu.: 1.000  
+ Median : 50.00   Median : 0.09200   Median : 2.990   Median : 4.000  
+ Mean   : 50.19   Mean   : 0.09622   Mean   : 3.746   Mean   : 5.071  
+ 3rd Qu.: 75.00   3rd Qu.: 0.12050   3rd Qu.: 5.364   3rd Qu.: 8.000  
+ Max.   :100.00   Max.   : 0.25046   Max.   :24.708   Max.   :18.000  
+ NA's   :338      NA's   :1504       NA's   :1504     NA's   :940     
+  drafted       
+ Mode :logical  
+ FALSE:1255     
+ TRUE :618      
+                
+                
+                
+                </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  tier               n
+  &lt;chr&gt;          &lt;int&gt;
+1 All-Star level    66
+2 Brief career     640
+3 Never played    1014
+4 Solid career     113
+5 Superstar         40</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  recruit_group       n
+  &lt;fct&gt;           &lt;int&gt;
+1 #1–10             158
+2 #11–25            232
+3 #26–50            382
+4 #51–100           763
+5 Outside top 100   338</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,873
+Columns: 10
+$ name          &lt;chr&gt; "Al Harrington", "Rashard Lewis", "Korleone Young", "Dan…
+$ rank          &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, 16, 1…
+$ recruit_year  &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 19…
+$ college       &lt;chr&gt; NA, NA, NA, "University of California, Los Angeles", "Lo…
+$ drafted       &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, …
+$ recruit_group &lt;chr&gt; "#1–10", "#1–10", "#1–10", "#1–10", "#1–10", "#1–10", "#…
+$ nba_mean_ws48 &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000, NA, …
+$ top_mean_wa   &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA, 3.8…
+$ total_seasons &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA, NA,…
+$ tier          &lt;chr&gt; "Solid career", "Superstar", "Brief career", "Solid care…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,873
+Columns: 10
+$ name          &lt;chr&gt; "Al Harrington", "Rashard Lewis", "Korleone Young", "Dan…
+$ rank          &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, 16, 1…
+$ recruit_year  &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 19…
+$ college       &lt;chr&gt; NA, NA, NA, "University of California, Los Angeles", "Lo…
+$ drafted       &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, …
+$ recruit_group &lt;fct&gt; #1–10, #1–10, #1–10, #1–10, #1–10, #1–10, #1–10, #1–10, …
+$ nba_mean_ws48 &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000, NA, …
+$ top_mean_wa   &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA, 3.8…
+$ total_seasons &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA, NA,…
+$ tier          &lt;fct&gt; Solid career, Superstar, Brief career, Solid career, Bri…</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 21 × 4
-    year christmas_births baseline_births percentage
-   &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;
- 1  1994             7192          11392.       63.1
- 2  1995             7027          10664.       65.9
- 3  1996             7092          10019.       70.8
- 4  1997             7055          10239.       68.9
- 5  1998             7020          11094.       63.3
- 6  1999             6674          11790.       56.6
- 7  2000             6719          11684.       57.5
- 8  2001             6603          10791.       61.2
- 9  2002             6774          10578.       64.0
-10  2003             6744          10716.       62.9
-# ℹ 11 more rows</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>      year      christmas_births baseline_births   percentage   
- Min.   :1994   Min.   :5728     Min.   :10019   Min.   :48.11  
- 1st Qu.:1999   1st Qu.:6325     1st Qu.:10578   1st Qu.:53.12  
- Median :2004   Median :6624     Median :11094   Median :60.73  
- Mean   :2004   Mean   :6601     Mean   :11252   Mean   :59.10  
- 3rd Qu.:2009   3rd Qu.:6774     3rd Qu.:11790   3rd Qu.:63.28  
- Max.   :2014   Max.   :7192     Max.   :12690   Max.   :70.79  </code></pre>
-</div>
-</div>
-<p>The <code>pct_of_baseline</code> ranges from roughly 48% to 75% — a 27-point swing across just 21 Christmases, with a</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8777789</code></pre>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 365 × 4
-   month date_of_month mean_resid date      
-   &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt; &lt;date&gt;    
- 1     1             1   -24.3    2001-01-01
- 2     1             2   -11.8    2001-01-02
- 3     1             3    -0.373  2001-01-03
- 4     1             4     2.54   2001-01-04
- 5     1             5     2.51   2001-01-05
- 6     1             6     2.00   2001-01-06
- 7     1             7     2.25   2001-01-07
- 8     1             8     0.993  2001-01-08
- 9     1             9    -0.0256 2001-01-09
-10     1            10     1.44   2001-01-10
-# ℹ 355 more rows</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
